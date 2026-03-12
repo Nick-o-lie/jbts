@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bcddaqikyxhfa"]
+
+[ext_resource type="Script" uid="uid://da08e7aklsvgf" path="res://player.gd" id="1_r0x5m"]
+[ext_resource type="Texture2D" uid="uid://bmo3ni3vbesb8" path="res://MainCharacter.png" id="1_xkndl"]
+[ext_resource type="Script" uid="uid://d3pno6f7o2fgo" path="res://MainCamera.gd" id="2_t88pq"]
+[ext_resource type="PackedScene" uid="uid://b07woho7y3joy" path="res://EnemyCube.tscn" id="2_xkndl"]
+[ext_resource type="Texture2D" uid="uid://cayl4owptoj7h" path="res://Control.png" id="3_u44n3"]
+[ext_resource type="Texture2D" uid="uid://cwtp4upayyntw" path="res://Back.png" id="4_sb48q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sb48q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xkndl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=856682591]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1310608379]
+scroll_offset = Vector2(186, 17)
+repeat_size = Vector2(2002, 3956)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=209029733]
+texture_repeat = 2
+position = Vector2(1, 0)
+texture = ExtResource("4_sb48q")
+region_enabled = true
+region_rect = Rect2(0, 0, 2002, 3956)
+
+[node name="Player" type="AnimatableBody2D" parent="." unique_id=1746047185]
+script = ExtResource("1_r0x5m")
+
+[node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="Player" unique_id=1210543023]
+sprite_frames = SubResource("SpriteFrames_sb48q")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1752639773]
+zoom = Vector2(0.3, 0.3)
+position_smoothing_enabled = true
+script = ExtResource("2_t88pq")
+
+[node name="Enemy" parent="." unique_id=1987883849 instance=ExtResource("2_xkndl")]
+position = Vector2(-260, -203)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=903803420]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1475587281]
+anchors_preset = -1
+anchor_top = 0.618
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_bottom = 37
+
+[node name="Control" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1876649608]
+layout_mode = 2
+texture = ExtResource("3_u44n3")
+expand_mode = 1
+stretch_mode = 5
