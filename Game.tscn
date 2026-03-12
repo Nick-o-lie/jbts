@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bcddaqikyxhfa"]
 
+[ext_resource type="Script" uid="uid://bip6reg66kwrl" path="res://game.gd" id="1_3mrqo"]
 [ext_resource type="Script" uid="uid://da08e7aklsvgf" path="res://player.gd" id="1_r0x5m"]
 [ext_resource type="Texture2D" uid="uid://bmo3ni3vbesb8" path="res://MainCharacter.png" id="1_xkndl"]
 [ext_resource type="Script" uid="uid://d3pno6f7o2fgo" path="res://MainCamera.gd" id="2_t88pq"]
@@ -19,10 +20,12 @@ animations = [{
 }]
 
 [node name="Node2D" type="Node2D" unique_id=856682591]
+script = ExtResource("1_3mrqo")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1310608379]
-scroll_offset = Vector2(186, 17)
+scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(2002, 3956)
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=209029733]
 texture_repeat = 2
