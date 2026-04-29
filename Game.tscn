@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://bcddaqikyxhfa"]
 
 [ext_resource type="Script" uid="uid://bip6reg66kwrl" path="res://game.gd" id="1_3mrqo"]
-[ext_resource type="PackedScene" uid="uid://cc0ef2d81c7b2" path="res://Player.tscn" id="3_t88pq"]
+[ext_resource type="PackedScene" path="res://Player.tscn" id="3_t88pq"]
 [ext_resource type="Texture2D" uid="uid://cayl4owptoj7h" path="res://Control.png" id="3_u44n3"]
 [ext_resource type="Texture2D" uid="uid://cwtp4upayyntw" path="res://Back.png" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://d3pno6f7o2fgo" path="res://MainCamera.gd" id="6_r0x5m"]
-[ext_resource type="Script" uid="uid://bfqu47orgv3uw" path="res://enemy_spawner.gd" id="7_3mrqo"]
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="7_3mrqo"]
 
 [sub_resource type="Environment" id="Environment_r0x5m"]
 background_mode = 3
 glow_enabled = true
 
-[node name="Node2D" type="Node2D" unique_id=856682591]
+[node name="Node2D" type="Node2D" unique_id=856682591 node_paths=PackedStringArray("_controlRect")]
 script = ExtResource("1_3mrqo")
+_controlRect = NodePath("CanvasLayer/Control")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1310608379]
 scroll_scale = Vector2(0.5, 0.5)
@@ -30,15 +31,19 @@ region_rect = Rect2(0, 0, 2002, 3956)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=903803420]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1475587281]
-anchors_preset = -1
-anchor_top = 0.618
-anchor_right = 1.0
+[node name="Control" type="TextureRect" parent="CanvasLayer" unique_id=1876649608]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-theme_override_constants/margin_bottom = 37
-
-[node name="Control" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1876649608]
-layout_mode = 2
+offset_left = -250.0
+offset_top = -580.0
+offset_right = 249.99963
+offset_bottom = -79.99951
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("3_u44n3")
 expand_mode = 1
 stretch_mode = 5

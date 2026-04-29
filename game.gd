@@ -1,21 +1,22 @@
 extends Node2D
 
 const Enemy = preload("res://EnemyCube.tscn")
+@export
+var _controlRect : TextureRect
 var EnemyMaxDistanceFromTouch = 400.0
 #aaaaaacjgcjyhkcchjchjhjchcjhjchjcchjhcjhjcchjchjcghdxgkhkxhtkxghkhxtkhxtxkhttkhxkxutxtku
 func _input(event):
-	if event is InputEventScreenTouch and event.is_pressed():
-		var controlRect = $CanvasLayer/MarginContainer/Control
+	if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.is_pressed():
 		var player = $Player
 		var camera = $Camera2D
-		var controlMinSize = min(controlRect.size.x, controlRect.size.y)
-		var controlCenter = controlRect.global_position + controlRect.size * 0.5
+		var controlSize = _controlRect.size.x
+		var controlCenter = _controlRect.global_position + Vector2(controlSize / 2, controlSize / 2)
 		var relativePosition = event.position - controlCenter
-		print(relativePosition)
+		if relativePosition.length() > controlSize / 2:
+			return
 		var viewportSize = get_viewport_rect().size / camera.zoom
 		var viewportMinSize = min(viewportSize.x, viewportSize.y)
-		print(viewportMinSize)
-		var multiplier = viewportMinSize / controlMinSize
+		var multiplier = viewportMinSize / controlSize
 		var multipliedPos = relativePosition * multiplier
 		
 		var worldPosition = player.global_position + multipliedPos
