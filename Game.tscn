@@ -1,23 +1,15 @@
 [gd_scene format=3 uid="uid://bcddaqikyxhfa"]
 
 [ext_resource type="Script" uid="uid://bip6reg66kwrl" path="res://game.gd" id="1_3mrqo"]
-[ext_resource type="Script" uid="uid://da08e7aklsvgf" path="res://player.gd" id="1_r0x5m"]
-[ext_resource type="Texture2D" uid="uid://bmo3ni3vbesb8" path="res://MainCharacter.png" id="1_xkndl"]
-[ext_resource type="Script" uid="uid://d3pno6f7o2fgo" path="res://MainCamera.gd" id="2_t88pq"]
-[ext_resource type="PackedScene" uid="uid://b07woho7y3joy" path="res://EnemyCube.tscn" id="2_xkndl"]
+[ext_resource type="PackedScene" uid="uid://cc0ef2d81c7b2" path="res://Player.tscn" id="3_t88pq"]
 [ext_resource type="Texture2D" uid="uid://cayl4owptoj7h" path="res://Control.png" id="3_u44n3"]
 [ext_resource type="Texture2D" uid="uid://cwtp4upayyntw" path="res://Back.png" id="4_sb48q"]
+[ext_resource type="Script" uid="uid://d3pno6f7o2fgo" path="res://MainCamera.gd" id="6_r0x5m"]
+[ext_resource type="Script" uid="uid://bfqu47orgv3uw" path="res://enemy_spawner.gd" id="7_3mrqo"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_sb48q"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_xkndl")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="Environment" id="Environment_r0x5m"]
+background_mode = 3
+glow_enabled = true
 
 [node name="Node2D" type="Node2D" unique_id=856682591]
 script = ExtResource("1_3mrqo")
@@ -34,19 +26,7 @@ texture = ExtResource("4_sb48q")
 region_enabled = true
 region_rect = Rect2(0, 0, 2002, 3956)
 
-[node name="Player" type="AnimatableBody2D" parent="." unique_id=1746047185]
-script = ExtResource("1_r0x5m")
-
-[node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="Player" unique_id=1210543023]
-sprite_frames = SubResource("SpriteFrames_sb48q")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1752639773]
-zoom = Vector2(0.3, 0.3)
-position_smoothing_enabled = true
-script = ExtResource("2_t88pq")
-
-[node name="Enemy" parent="." unique_id=1987883849 instance=ExtResource("2_xkndl")]
-position = Vector2(-260, -203)
+[node name="Player" parent="." unique_id=1771631372 instance=ExtResource("3_t88pq")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=903803420]
 
@@ -62,3 +42,13 @@ layout_mode = 2
 texture = ExtResource("3_u44n3")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1246385101]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("6_r0x5m")
+
+[node name="EnemySpawner" type="Node" parent="." unique_id=2050955193]
+script = ExtResource("7_3mrqo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=674222057]
+environment = SubResource("Environment_r0x5m")

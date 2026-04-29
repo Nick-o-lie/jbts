@@ -1,19 +1,70 @@
 [gd_scene format=3 uid="uid://b07woho7y3joy"]
 
-[ext_resource type="Texture2D" uid="uid://y6pvf1divx3u" path="res://EnemySquare.png" id="1_t2le2"]
+[ext_resource type="Script" uid="uid://0s28oqauihps" path="res://enemy_cube.gd" id="1_6g5r0"]
+[ext_resource type="Texture2D" uid="uid://mrhp1f4hywhp" path="res://EnemyRectangle.png" id="2_6g5r0"]
+[ext_resource type="PackedScene" uid="uid://c3e5picmhx6sm" path="res://hit_particles.tscn" id="3_4wwgf"]
+[ext_resource type="PackedScene" uid="uid://dddcpfi1iyyjh" path="res://die_particles.tscn" id="3_d0cvr"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_t88pq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_t2le2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2le2"]
+size = Vector2(106, 106)
+
+[sub_resource type="Animation" id="Animation_6g5r0"]
+resource_name = "attack"
+step = 0.016666668
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.48333332),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"AttackWindUp"
+}, {
+"args": [],
+"method": &"Attack"
 }]
+}
 
-[node name="Enemy" type="AnimatableBody2D" unique_id=1987883849]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4wwgf"]
+_data = {
+&"attack": SubResource("Animation_6g5r0")
+}
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1787075879]
-sprite_frames = SubResource("SpriteFrames_t88pq")
+[node name="Enemy" type="AnimatableBody2D" unique_id=1987883849 groups=["Enemies"]]
+sync_to_physics = false
+script = ExtResource("1_6g5r0")
+_hitParticles = ExtResource("3_4wwgf")
+_dieParticles = ExtResource("3_d0cvr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=726761052]
+shape = SubResource("RectangleShape2D_t2le2")
+
+[node name="Vertices" type="Node2D" parent="." unique_id=997866082]
+
+[node name="Marker2D" type="Marker2D" parent="Vertices" unique_id=1862028952]
+position = Vector2(-53, -53)
+gizmo_extents = 0.0
+
+[node name="Marker2D2" type="Marker2D" parent="Vertices" unique_id=18199993]
+position = Vector2(53, -53)
+gizmo_extents = 0.0
+
+[node name="Marker2D3" type="Marker2D" parent="Vertices" unique_id=1224696132]
+position = Vector2(53, 53)
+gizmo_extents = 0.0
+
+[node name="Marker2D4" type="Marker2D" parent="Vertices" unique_id=1569377307]
+position = Vector2(-53, 53)
+gizmo_extents = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=646049746]
+libraries/ = SubResource("AnimationLibrary_4wwgf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1949588245]
+modulate = Color(4.702355, 0, 0, 1)
+scale = Vector2(0.13651185, 0.13651185)
+texture = ExtResource("2_6g5r0")

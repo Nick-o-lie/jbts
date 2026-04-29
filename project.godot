@@ -26,6 +26,10 @@ window/handheld/orientation=1
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[global_group]
+
+Enemies=""
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -35,4 +39,5 @@ version_control/autoload_on_startup=true
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
