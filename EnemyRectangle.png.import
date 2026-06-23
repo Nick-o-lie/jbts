@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mrhp1f4hywhp"
-path.s3tc="res://.godot/imported/EnemyRectangle.png-1c11d78a5c2a9b3fc06a2ce26e82a5bc.s3tc.ctex"
+path.etc2="res://.godot/imported/EnemyRectangle.png-1c11d78a5c2a9b3fc06a2ce26e82a5bc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://EnemyRectangle.png"
-dest_files=["res://.godot/imported/EnemyRectangle.png-1c11d78a5c2a9b3fc06a2ce26e82a5bc.s3tc.ctex"]
+dest_files=["res://.godot/imported/EnemyRectangle.png-1c11d78a5c2a9b3fc06a2ce26e82a5bc.etc2.ctex"]
 
 [params]
 

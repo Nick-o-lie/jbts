@@ -4,6 +4,8 @@ extends Node
 var _camera = $"../Camera2D"
 @onready
 var _scene = $".."
+@onready
+var _enemyControl = $"../EnemyControl"
 
 var _enemy = preload("res://EnemyCube.tscn")
 
@@ -13,6 +15,8 @@ var _actions = []
 var _chosenAction = null
 
 var _spawnRadius = 3000.0
+
+var BPM = 100.0
 
 func ChooseAction() -> void:
 	# Step 1: Calculate total frequency (weight)
@@ -47,7 +51,8 @@ func ExecuteAction() -> void:
 	var offset = Vector2(cos(angle) * _spawnRadius, sin(angle) * _spawnRadius)
 	var enemy = enemyToSpawn.instantiate()
 	enemy.global_position = _camera.global_position + offset
-	_scene.add_child(enemy)
+	enemy.BPM = BPM
+	_enemyControl.add_child(enemy)
 	if _chosenAction["count"] > 1:
 		var angleOffset = 2 * PI / _chosenAction["count"]
 		for i in range(1, _chosenAction["count"]):
@@ -55,7 +60,7 @@ func ExecuteAction() -> void:
 			offset = Vector2(cos(angle) * _spawnRadius, sin(angle) * _spawnRadius)
 			enemy = enemyToSpawn.instantiate()
 			enemy.global_position = _camera.global_position + offset
-			_scene.add_child(enemy)
+			_enemyControl.add_child(enemy)
 		
 	
 # Called when the node enters the scene tree for the first time.
