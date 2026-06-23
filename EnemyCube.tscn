@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b07woho7y3joy"]
 
-[ext_resource type="Script" path="res://enemy_cube.gd" id="1_6g5r0"]
+[ext_resource type="Script" uid="uid://0s28oqauihps" path="res://enemy_cube.gd" id="1_6g5r0"]
 [ext_resource type="Texture2D" uid="uid://mrhp1f4hywhp" path="res://EnemyRectangle.png" id="2_6g5r0"]
 [ext_resource type="PackedScene" uid="uid://c3e5picmhx6sm" path="res://hit_particles.tscn" id="3_4wwgf"]
 [ext_resource type="PackedScene" uid="uid://dddcpfi1iyyjh" path="res://die_particles.tscn" id="3_d0cvr"]
@@ -10,6 +10,7 @@ size = Vector2(106, 106)
 
 [sub_resource type="Animation" id="Animation_6g5r0"]
 resource_name = "attack"
+length = 2.0
 step = 0.016666668
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -18,7 +19,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.48333332),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],

@@ -3,7 +3,7 @@ extends AnimatableBody2D
 #gxhgxkhgxkbgkbgxhkthktxjhtdhktjghxxghjxyhkxykxkykxyhykxxthkxtyhkxhkxyxyhxykkdyhdyhyhkkyhddyhiyhdkdyykdykddyhkytkthddthk
 var speed = 100.0
 @onready
-var _player = $"../Player"
+var _player = $"../../Player"
 @onready
 var _animationPlayer = $AnimationPlayer
 @export
@@ -12,6 +12,10 @@ var _hitParticles : PackedScene
 var _dieParticles : PackedScene
 @onready
 var _sprite = $Sprite2D
+@export
+var attackDistance = 500.0
+var _defaultBPM = 60.0
+var BPM = 100.0
 var _targetPos = null
 var HP = 10.0
 
@@ -38,7 +42,8 @@ func AttackWindUp() -> void:
 	_targetPos = _player.global_position
 	var directionalTween = create_tween()
 	var windUpVector = global_position - (_targetPos - global_position).normalized() * 100.0
-	directionalTween.tween_property(self, "global_position", windUpVector, 30.0/60).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	var timeForTween = 1.0 * _defaultBPM / BPM
+	directionalTween.tween_property(self, "global_position", windUpVector, timeForTween).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	var angularTween = create_tween()
 	var targetRotation = global_position.angle_to_point(_targetPos) + randi_range(1, 4) * PI / 2 + PI / 4
 	while abs(targetRotation - rotation) < 3 * PI / 4:
@@ -46,28 +51,82 @@ func AttackWindUp() -> void:
 			targetRotation += PI / 2
 		else:
 			targetRotation -= PI / 2
-	angularTween.tween_property(self, "rotation", targetRotation, 30.0/60) \
+	angularTween.tween_property(self, "rotation", targetRotation, timeForTween) \
 	.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	
 func Attack() -> void:
 	var directionalTween = create_tween()
 	var attackVector = _targetPos + (_targetPos - global_position).normalized() * 500.0
-	directionalTween.tween_property(self, "global_position", attackVector, 30.0/60).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	var timeForTween = 1.0 * _defaultBPM / BPM
+	directionalTween.tween_property(self, "global_position", attackVector, timeForTween).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_targetPos = _player.global_position
+	_animationPlayer.speed_scale = BPM / 60.0
 	pass # Replace with function body.
+	
+func _noAction() -> void:
+	pass
+	
+func _attackStart() -> void:
+	_animationPlayer.play("attack")
 
+	
+
+var possibleActions = {
+	'moveX' : {
+		'frequency' : 1.0,
+		'action' : _noAction
+	},
+	'moveY' : {
+		'frequency' : 1.0,
+		'action' : _noAction
+	},
+	'attack' : {
+		'frequency' : 5.0,
+		'action' : _attackStart
+	},
+	'turn' : {
+		'frequency' : 0.5,
+		'action' : _noAction
+	},
+	'rotate' : {
+		'frequency': 0.5,
+		'action' : _noAction
+	}
+}
+
+func OnBeat() -> void:
+	if not _animationPlayer.is_playing():
+		var currentActions = possibleActions.duplicate()
+		var distanceToPlayer = _player.global_position.distance_to(global_position)
+		if distanceToPlayer > attackDistance:
+			currentActions.erase('attack')
+		ChooseAction(currentActions)
+		
+func ChooseAction(actions : Dictionary) -> void:
+	var total_frequency = 0.0
+	for action in actions.values():
+		total_frequency += float(action["frequency"])
+	
+	# Handle edge case: empty array or zero total frequency
+	if total_frequency <= 0.0 or actions.is_empty():
+		push_error("Cannot pick from empty list or zero frequencies")
+	
+	# Step 2: Generate random value in [0, total_frequency)
+	var random_value = randf() * total_frequency
+	
+	# Step 3: Iterate and accumulate until we exceed random_value
+	var accumulated = 0.0
+	for action in actions.values():
+		accumulated += float(action["frequency"])
+		if accumulated >= random_value:
+			action['action'].call()
+			return
 
 var _doNothing = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var distanceToPlayer = _player.global_position.distance_to(global_position)
-	if distanceToPlayer > 500.0 and not _animationPlayer.is_playing():
-		_targetPos = _player.global_position
-		var moveVector = (_targetPos - global_position).normalized()
-		global_position += moveVector * speed * delta
-	elif not _animationPlayer.is_playing():
-		_animationPlayer.play("attack")
+	pass

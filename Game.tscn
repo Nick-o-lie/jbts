@@ -60,3 +60,8 @@ environment = SubResource("Environment_r0x5m")
 
 [node name="AudioCheck" type="Node" parent="." unique_id=228165666]
 script = ExtResource("7_joorw")
+
+[node name="EnemyControl" type="Node" parent="." unique_id=1160724454]
+script = ExtResource("7_joorw")
+
+[node name="Timer" type="Timer" parent="EnemyControl" unique_id=321792129]
