@@ -52,6 +52,7 @@ func ExecuteAction() -> void:
 	var enemy = enemyToSpawn.instantiate()
 	enemy.global_position = _camera.global_position + offset
 	enemy.BPM = BPM
+	enemy.Octave = randi_range(0, 9)
 	_enemyControl.add_child(enemy)
 	if _chosenAction["count"] > 1:
 		var angleOffset = 2 * PI / _chosenAction["count"]

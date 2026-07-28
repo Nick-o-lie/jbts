@@ -35,3 +35,5 @@ explosiveness = 0.99
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_d0cvr")
 script = ExtResource("2_ruftr")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

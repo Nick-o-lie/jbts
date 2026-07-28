@@ -25,8 +25,9 @@ var _available: bool = false
 
 
 func _init() -> void:
-	if Engine.has_singleton(PLUGIN_NAME):
-		_singleton  = Engine.get_singleton(PLUGIN_NAME)
+	print("AudioFFTInterface started")
+	if Engine.has_singleton("AudioFFTPlugin"):
+		_singleton  = Engine.get_singleton("AudioFFTPlugin")
 		_available  = true
 	else:
 		push_warning(
@@ -59,7 +60,7 @@ func capturing() -> bool:
 
 # ── Data ───────────────────────────────────────────────────────────────────
 
-## Returns a PackedFloat32Array of 512 magnitude values (DC … Nyquist).
+## Returns a PackedFloat32Array of 513 magnitude values (DC … Nyquist).
 ## Call this every frame or as needed.  Thread-safe.
 func get_spectrum() -> PackedFloat32Array:
 	if not _available:
@@ -67,7 +68,7 @@ func get_spectrum() -> PackedFloat32Array:
 	return _singleton.getFrequencyData()
 
 
-## Number of frequency bins (512 when FFT_SIZE = 1024).
+## Number of frequency bins (512 max).
 func bin_count() -> int:
 	if not _available:
 		return 0

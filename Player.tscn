@@ -10,7 +10,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_e80uo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -45,7 +45,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_3mrqo"]
 resource_name = "attack"
-length = 0.23333502
+length = 0.11666833941806107
 step = 0.016666668
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -54,58 +54,84 @@ tracks/0/path = NodePath("Player")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.06666667, 0.13333334),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"DashToTarget"
-}, {
-"args": [],
-"method": &"OnAttackHit"
 }]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Player")
+tracks/1/path = NodePath("Player/Visual/ScaledSprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.11666667),
+"times": PackedFloat32Array(0, 0.06666667, 0.11666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 1.5), Vector2(3, 0.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/Visual/ScaledSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.083333336, 0.11666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-20, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cxr5p"]
+resource_name = "attack_hit"
+length = 0.10000167188216
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Visual/ScaledSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.016666666, 0.049999997, 0.06666666, 0.099999994),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 1.5), Vector2(0.6, 1.1), Vector2(1.2, 0.8), Vector2(0.905, 1.3), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Visual/ScaledSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.016666666, 0.049999997, 0.06666666, 0.099999994),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30, 0), Vector2(20, 0), Vector2(-10, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"OvershootCameraEnemy"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Player/Visual/ScaledSprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.11666667, 0.13333334, 0.15, 0.18333334, 0.2, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.6, 1.5), Vector2(3, 0.4), Vector2(0.4, 1.5), Vector2(0.6, 1.1), Vector2(1.2, 0.8), Vector2(0.905, 1.3), Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Player/Visual/ScaledSprite:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.083333336, 0.11666667, 0.13333334, 0.15, 0.18333334, 0.2, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-20, 0), Vector2(0, 0), Vector2(0, 0), Vector2(30, 0), Vector2(20, 0), Vector2(-10, 0), Vector2(0, 0), Vector2(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_kpjcp"]
 resource_name = "attack"
-length = 0.23333502
+length = 0.16666834202576428
 step = 0.016666668
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -121,6 +147,47 @@ tracks/0/keys = {
 "method": &"DashToPlace"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Visual/ScaledSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.1, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.25), Vector2(3, 0.4), Vector2(1.645, 0.95), Vector2(0.805, 1.26)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/Visual/ScaledSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e80uo"]
+resource_name = "jump_recovery"
+length = 0.13333500695396214
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Visual/ScaledSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.06666667, 0.1, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 0.4), Vector2(1.645, 0.95), Vector2(0.805, 1.26), Vector2(1.265, 0.925), Vector2(1, 1)]
+}
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -128,49 +195,28 @@ tracks/1/path = NodePath("Player")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.033333335),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"OvershootCameraJump"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Player/Visual/ScaledSprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.8, 1.25), Vector2(3, 0.4), Vector2(1.645, 0.95), Vector2(0.805, 1.26), Vector2(1.265, 0.925), Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Player/Visual/ScaledSprite:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.18333334, 0.2, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kne1u"]
 _data = {
 &"RESET": SubResource("Animation_kne1u"),
 &"attack": SubResource("Animation_3mrqo"),
-&"jump": SubResource("Animation_kpjcp")
+&"attack_hit": SubResource("Animation_cxr5p"),
+&"jump": SubResource("Animation_kpjcp"),
+&"jump_recovery": SubResource("Animation_e80uo")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kne1u"]
-radius = 53.89
+[sub_resource type="CircleShape2D" id="CircleShape2D_v5vfr"]
+radius = 55.0
 
 [node name="Player" type="AnimatableBody2D" unique_id=1771631372]
+sync_to_physics = false
 script = ExtResource("1_kne1u")
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=64531565]
@@ -181,11 +227,6 @@ sprite_frames = SubResource("SpriteFrames_sb48q")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_kne1u")
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=1901225449]
-shape = SubResource("CircleShape2D_kne1u")
-target_position = Vector2(0, 0)
-max_results = 1
-
 [node name="Visual" type="Node2D" parent="." unique_id=1763709474]
 
 [node name="ScaledSprite" type="Node2D" parent="Visual" unique_id=311169208]
@@ -194,3 +235,6 @@ max_results = 1
 modulate = Color(0, 0, 340.22443, 1)
 scale = Vector2(0.1403468, 0.1403468)
 texture = ExtResource("3_kne1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1760896047]
+shape = SubResource("CircleShape2D_v5vfr")

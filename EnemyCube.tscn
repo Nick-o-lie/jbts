@@ -30,9 +30,85 @@ tracks/0/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_d0cvr"]
+resource_name = "moveX"
+step = 0.016666668
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"MoveX"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_w06ne"]
+resource_name = "moveY"
+step = 0.016666668
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"MoveY"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2bt7h"]
+resource_name = "rotate"
+step = 0.016666668
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Rotate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0trm2"]
+resource_name = "turn"
+step = 0.016666668
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Turn"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4wwgf"]
 _data = {
-&"attack": SubResource("Animation_6g5r0")
+&"attack": SubResource("Animation_6g5r0"),
+&"moveX": SubResource("Animation_d0cvr"),
+&"moveY": SubResource("Animation_w06ne"),
+&"rotate": SubResource("Animation_2bt7h"),
+&"turn": SubResource("Animation_0trm2")
 }
 
 [node name="Enemy" type="AnimatableBody2D" unique_id=1987883849 groups=["Enemies"]]

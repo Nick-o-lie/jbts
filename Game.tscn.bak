@@ -5,16 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://cayl4owptoj7h" path="res://Control.png" id="3_u44n3"]
 [ext_resource type="Texture2D" uid="uid://cwtp4upayyntw" path="res://Back.png" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://d3pno6f7o2fgo" path="res://MainCamera.gd" id="6_r0x5m"]
+<<<<<<< HEAD
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="7_3mrqo"]
+[ext_resource type="Script" uid="uid://5x15yp8pmmfc" path="res://audio_check.gd" id="7_joorw"]
+=======
 [ext_resource type="Script" uid="uid://bfqu47orgv3uw" path="res://enemy_spawner.gd" id="7_3mrqo"]
-[ext_resource type="Script" uid="uid://bvkdneq5akhqg" path="res://enemy_control.gd" id="8_joorw"]
+[ext_resource type="Script" uid="uid://bvkdneq5akhqg" path="res://enemy_control.gd" id="7_joorw"]
+>>>>>>> origin/master
 
 [sub_resource type="Environment" id="Environment_r0x5m"]
 background_mode = 3
 glow_enabled = true
 
-[node name="Node2D" type="Node2D" unique_id=856682591 node_paths=PackedStringArray("_controlRect")]
+[node name="Node2D" type="Node2D" unique_id=856682591]
 script = ExtResource("1_3mrqo")
-_controlRect = NodePath("CanvasLayer/Control")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1310608379]
 scroll_scale = Vector2(0.5, 0.5)
@@ -59,9 +63,12 @@ script = ExtResource("7_3mrqo")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=674222057]
 environment = SubResource("Environment_r0x5m")
 
+<<<<<<< HEAD
+[node name="AudioCheck" type="Node" parent="." unique_id=228165666]
+script = ExtResource("7_joorw")
+=======
 [node name="EnemyControl" type="Node" parent="." unique_id=1160724454]
-script = ExtResource("8_joorw")
+script = ExtResource("7_joorw")
 
 [node name="Timer" type="Timer" parent="EnemyControl" unique_id=321792129]
-
-[node name="AudioRestart" type="Timer" parent="EnemyControl" unique_id=632746707]
+>>>>>>> origin/master
